@@ -11,7 +11,7 @@
 <form action="/register-result" method="post" >
 	<p>UserName: <input type="text" name= "username" required/> </p>
 	<p>Password: <input type="password" name= "password" required/> </p>
-	<p> Your Name: <input type="text" name= "yourName" required/> </p>
+	<p> Your Name: <input type="text" name= "yourname" required/> </p>
 	<p><input type="submit"/></p>
 </form>
 

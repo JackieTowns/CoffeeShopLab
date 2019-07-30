@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<p> Thank you for registering, ${users.getYourname}!</p>
+<p> Thank you for registering, ${user.getYourname()}!</p>
 
 </body>
 </html>
