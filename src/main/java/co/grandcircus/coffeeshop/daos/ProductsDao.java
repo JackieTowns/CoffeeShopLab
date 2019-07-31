@@ -2,45 +2,44 @@ package co.grandcircus.coffeeshop.daos;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.grandcircus.coffeeshop.entities.Product;
 
-
 @Repository
+@Transactional
 public class ProductsDao {
-	
-	@Autowired
-	private JdbcTemplate jdbc;
 
+	@PersistenceContext
+	EntityManager em;
+	
 	public List<Product> findAll() {
 
-		String sql = "SELECT * FROM products";
-		return jdbc.query(sql, new BeanPropertyRowMapper<>(Product.class));
+		List<Product> products = em.createQuery("FROM Product", Product.class).getResultList();
+		return products;
 	}
 
+	// find specific Product with it's unique ID
 	public Product findById(Long id) {
-		String sql = "SELECT * FROM products WHERE id = ?";
-		return jdbc.queryForObject(sql, new BeanPropertyRowMapper<>(Product.class), id);
-	}
-
-	public void update(Product product) {
-		String sql = "UPDATE Products SET name=?, description=?, price=? WHERE id=?";
-		jdbc.update(sql, product.getName(), product.getDescription(), product.getPrice(), product.getId());
+		return em.find(Product.class, id);
 	}
 
 	public void create(Product product) {
-		String sql = "INSERT INTO Products (name, description, price) VALUES(?, ?, ?)";
-		jdbc.update(sql, product.getName(), product.getDescription(), product.getPrice());
+		em.persist(product);
+	}
+
+	// edit
+	public void update(Product product) {
+		em.merge(product);
 	}
 
 	public void delete(Long id) {
-		String sql = "DELETE FROM Products WHERE id = ?";
-		jdbc.update(sql, id);
-
+		Product product = em.getReference(Product.class, id);
+		em.remove(product);
 	}
 
 }

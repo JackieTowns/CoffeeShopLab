@@ -1,0 +1,52 @@
+@charset "ISO-8859-1";
+h1{
+	text-align: center; 
+	font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* Glyph, by Harry Roberts: https://css-tricks.com/examples/hrs/*/
+
+hr{
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: double #333;
+    color: #333;
+    text-align: center;
+}
+hr :after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+
+body{
+	font-family: 'Noto Sans JP', sans-serif;
+}
+
+header{
+	text-align: right; 
+}
+
+.entireForm{ 
+	margin-left: 350px;
+	margin-top: 20px;  
+}
+
+#registerForm{
+	margin-left: 100px;
+}
+
+#registerAdmin{
+	margin-left: 50px;
+	margin-top: 20px;  
+}
+#thanks{
+	text-align: center; 
+	margin-top: 100px; 
+}
+

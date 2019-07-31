@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+     
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,11 +21,6 @@
 <h1>Products</h1>
 <hr/>
 
-<div id="registerAdmin"> 
-<p> <a href="/register">Register Yourself</a></p>
-<p> <a href="/admin">Admin</a></p> 
-</div> 
-
 <div class="entireForm"> 
 		<table>
 			<thead>
@@ -38,13 +34,13 @@
 					<td><a href="/index?id=${theProducts.id}">${theProducts.name}</a></td>
 					<td>${theProducts.description}</td>
 					<td>${theProducts.price}</td>
+					<td> <a href="/admin/delete?id=${theProducts.id }">Delete Item</a></td> 
 				</tr>
 			</c:forEach>
 			</tbody>
 		</table>
-	</div>
-		
-		
+	</div>	
+		<p> <a href="/add">Add to Menu</a></p>	
 
 </body>
 </html>
