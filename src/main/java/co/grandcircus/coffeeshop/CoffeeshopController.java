@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import co.grandcircus.coffeeshop.daos.ProductsDao;
 import co.grandcircus.coffeeshop.daos.UserDao;
+import co.grandcircus.coffeeshop.daos.UserRepository;
 import co.grandcircus.coffeeshop.entities.Product;
 import co.grandcircus.coffeeshop.entities.User;
 
@@ -51,15 +52,14 @@ public class CoffeeshopController {
 	@PostMapping("/register-result")
 	public ModelAndView addRegisterResult(User users, HttpSession session) {
 
-		// if (users!=null) {
 		daoUser.create(users);
 		session.setAttribute("preference", users.getYourname());
 		return new ModelAndView("register-result");
 
 	}
-	
-	// ------------------------- Admin-------------------------------
 
+
+	// ------------------------- Admin-------------------------------
 
 	@RequestMapping("/admin")
 	public ModelAndView admin() {
@@ -81,19 +81,50 @@ public class CoffeeshopController {
 		return new ModelAndView("redirect:/admin");
 	}
 
-
 	@RequestMapping("/admin/delete")
 	public ModelAndView delete(@RequestParam("id") Long id) {
 		dao.delete(id);
 		return new ModelAndView("redirect:/admin");
 	}
 
+	// ------------------------- Login-------------------------------
+
+	@Autowired
+	UserRepository daoLogin;
+
+	@RequestMapping("/login")
+	public ModelAndView showLogin() {
+		return new ModelAndView("login");
+	}
+
+	
+	@PostMapping("/login")
+	public ModelAndView submitLogin(@RequestParam("username") String username,
+			@RequestParam("password") String password, HttpSession session) {
+
+		User loginUser = daoLogin.findByUsernameAndPassword(username, password);
+
+		if (loginUser == null) {
+			return new ModelAndView("index", "error", "Incorrect username or password. Please try again!");
+		}
+
+		session.setAttribute("user", loginUser);
+
+		return new ModelAndView("redirect:/");
+	}
+
+	@RequestMapping("/logout")
+	public ModelAndView logout(HttpSession session) {
+		session.invalidate();
+		return new ModelAndView("redirect:/");
+	}
 
 	// ------------------------- Sessions-------------------------------
 
-	@RequestMapping("/sessions/unset")
-	public ModelAndView unsetPreferences(HttpSession session) {
-		session.removeAttribute("preference");
-		return new ModelAndView("redirect:/register");
-	}
+	/*
+	 * @RequestMapping("/sessions/unset") public ModelAndView
+	 * unsetPreferences(HttpSession session) {
+	 * session.removeAttribute("preference"); return new
+	 * ModelAndView("redirect:/register"); }
+	 */
 }

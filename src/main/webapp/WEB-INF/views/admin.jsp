@@ -13,9 +13,26 @@
 </head>
 <body>
 
-<header> Welcome back ${preference}!!
-<br/> 
-<a href="/sessions/unset">Logout</a>
+<header> 
+		
+		<c:if test="${ not empty preference }">
+			<%-- For /register-result being added to the session --%> 
+			<p> Welcome back ${preference}!!</p> 
+			<p> <a href="/admin">Admin</a></p> 
+			<p><a href="/logout">Logout</a></p>
+		</c:if>
+		
+		<c:if test="${  empty user and empty preference }">
+			<p> <a href="/register">Register Yourself</a></p>
+			<p> <a href="/login">Log in</a></p>
+		</c:if>
+		
+		<c:if test="${ not empty user }">
+			<p>Welcome ${user.username}!!</p>
+			<p> <a href="/">Home</a></p> 
+			<p><a href="/logout">Logout</a></p>
+		</c:if>
+
 </header>
 
 <h1>Products</h1>
@@ -40,7 +57,7 @@
 			</tbody>
 		</table>
 	</div>	
-		<p> <a href="/add">Add to Menu</a></p>	
+		<p> <a href="/add" id="addMenu">Add to Menu</a></p>	
 
 </body>
 </html>

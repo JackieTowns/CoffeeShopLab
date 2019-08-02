@@ -49,4 +49,12 @@ header{
 	text-align: center; 
 	margin-top: 100px; 
 }
-
+#AdminMessage{
+	font-style: italic; 
+	margin-top: 75px; 
+	margin-left: 420px;
+}
+#addMenu{ 
+	font-style: italic; 
+	margin-left: 550px;
+}
