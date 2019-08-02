@@ -52,9 +52,24 @@ header{
 #AdminMessage{
 	font-style: italic; 
 	margin-top: 75px; 
-	margin-left: 420px;
+	margin-left: 500px;
 }
 #addMenu{ 
 	font-style: italic; 
-	margin-left: 550px;
+	margin-left: 850px;
 }
+#table{
+	width: 50%;
+	text-align: justify; 
+	margin-left: 300px;
+	margin-top: 20px;  
+}
+
+#table2{
+	width: 60%;
+	text-align: justify; 
+	margin-left: 250px;
+	margin-top: 20px;  
+}
+
+

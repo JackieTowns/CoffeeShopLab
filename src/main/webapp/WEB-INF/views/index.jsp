@@ -48,8 +48,8 @@ ${ error }
 <div id="registerAdmin"> 
 </div> 
 
-<div class="entireForm"> 
-		<table >
+
+		<table id="table">
 			<thead>
 				<tr>
 					<th>Name</th><th>Description</th><th>Price</th>
@@ -65,7 +65,7 @@ ${ error }
 			</c:forEach>
 			</tbody>
 		</table>
-	</div>
+	
 	
 	
 	<c:if test="${  empty user and empty preference }">
